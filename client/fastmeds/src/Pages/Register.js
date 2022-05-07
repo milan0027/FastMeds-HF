@@ -126,9 +126,11 @@ export default function Register() {
     showToast('ERROR', `ERROR(${err.code}): ${err.message}`);
   }
 
+  if (localStorage.getItem('UserId')) navigate('/');
+
   return (
     <>
-      <Navbar />
+      <Navbar isLoggedIn={false} />
       <Container component="main" maxWidth="sm">
         <CssBaseline />
         <Div
@@ -206,7 +208,7 @@ export default function Register() {
                 errors.confirmPassword = "This doesn't match with the above password";
               }
 
-              if (!values.beds.match(/\d/)) {
+              if (values.beds && !values.beds.match(/\d/)) {
                 errors.beds = 'No. of beds must be of numeric type';
               }
 
@@ -228,7 +230,7 @@ export default function Register() {
               try {
                 setIsLoading(true);
 
-                await toast.promise(
+                const { data } = await toast.promise(
                   api.register(formdata),
                   {
                     pending: 'Creating account',
@@ -245,6 +247,7 @@ export default function Register() {
                   },
                   { position: 'top-center' }
                 );
+                localStorage.setItem('UserId', data?.user.id);
               } catch (e) {
                 if (!e?.response?.data?.message) {
                   showToast('ERROR', 'Error in creating an account!');

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -47,9 +47,13 @@ export default function Login() {
     event.preventDefault();
   };
 
+  useEffect(() => {
+    if (localStorage.getItem('UserId')) navigate('/');
+  }, []);
+
   return (
     <>
-      <Navbar />
+      <Navbar isLoggedIn={false} />
       <Container component="main" maxWidth="sm">
         <CssBaseline />
         <Div
@@ -119,7 +123,7 @@ export default function Login() {
               try {
                 setIsLoading(true);
 
-                await toast.promise(
+                const { data } = await toast.promise(
                   api.signIn(formData),
                   {
                     pending: 'Logging in',
@@ -136,6 +140,8 @@ export default function Login() {
                   },
                   { position: 'top-center' }
                 );
+                localStorage.setItem('UserId', data?.user.id);
+                navigate('/');
               } catch (e) {
                 console.log(e);
                 if (!e?.response?.data?.message) {

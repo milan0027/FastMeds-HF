@@ -12,4 +12,4 @@ export const forgotPassword = (formData) => API.post('/auth/forgot-password', fo
 export const resetPassword = (formData, token) => API.post(`/auth/reset-password?token=${token}`, formData);
 export const signOut = (formData) => API.post('/auth/logout', formData);
 
-export const getAllMedicines = () => API.get('/companies');
+export const getUserById = (id) => API.get(`/users/${id}`);

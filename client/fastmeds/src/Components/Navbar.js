@@ -22,7 +22,7 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
   },
 }));
 
-function Navbar() {
+function Navbar({ isLoggedIn, signOut }) {
   return (
     <div>
       <AppBar position="fixed">
@@ -31,14 +31,25 @@ function Navbar() {
           <Link variant="h6" underline="none" color="inherit" href="/" sx={{ fontSize: 24 }}>
             {'FastMeds'}
           </Link>
-          <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-            <Link color="inherit" variant="h6" underline="none" href="/auth/login" sx={rightLink}>
-              {'Sign In'}
-            </Link>
-            <Link variant="h6" underline="none" href="/auth/register" sx={rightLink}>
-              {'Sign Up'}
-            </Link>
-          </Box>
+          {isLoggedIn === false ? (
+            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+              <Link color="inherit" variant="h6" underline="none" href="/auth/login" sx={rightLink}>
+                {'Sign In'}
+              </Link>
+              <Link variant="h6" underline="none" href="/auth/register" sx={rightLink}>
+                {'Sign Up'}
+              </Link>
+            </Box>
+          ) : (
+            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+              <Link color="inherit" variant="h6" underline="none" href="/auth/login" sx={rightLink}>
+                {'Update Inventory'}
+              </Link>
+              <Link component="button" variant="h6" underline="none" onClick={signOut} sx={rightLink}>
+                {'SignOut'}
+              </Link>
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
       <Toolbar />
