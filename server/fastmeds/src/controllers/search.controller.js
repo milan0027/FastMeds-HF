@@ -22,7 +22,6 @@ const searchItem = catchAsync(async (req, res) => {
   // search stores with brand name
   const medUsers = await User.find({
     $and: [
-      { userType: req.body.type },
       { city },
       {
         inventory: {
@@ -38,7 +37,6 @@ const searchItem = catchAsync(async (req, res) => {
   // search stores with generic name
   const genericUsers = await User.find({
     $and: [
-      { userType: req.body.type },
       { city },
       {
         inventory: {
@@ -88,6 +86,7 @@ const searchItem = catchAsync(async (req, res) => {
   });
 
   destinations.sort(durationSort);
+  // console.log(destinations);
   res.send(destinations);
   // return top 10 nearest stores
 });
@@ -162,6 +161,12 @@ const itemList = catchAsync(async (req, res) => {
   const { name } = req.body;
   const list = await Medicine.find({ name: { $regex: name, $options: 'i' } });
 
+  // console.log(list);
+  res.send(list);
+});
+
+const getAllMedicine = catchAsync(async (req, res) => {
+  const list = await Medicine.find({});
   res.send(list);
 });
 
@@ -170,4 +175,5 @@ module.exports = {
   addItem,
   deleteItem,
   itemList,
+  getAllMedicine,
 };

@@ -4,7 +4,6 @@ const searchItem = {
   body: Joi.object().keys({
     latitude: Joi.string().required(),
     longitude: Joi.string().required(),
-    type: Joi.string().required(),
     item: Joi.string().required(),
     quantity: Joi.number().required(),
   }),

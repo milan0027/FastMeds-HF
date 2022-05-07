@@ -11,6 +11,9 @@ export const register = (formData) => API.post('/auth/register', formData);
 export const forgotPassword = (formData) => API.post('/auth/forgot-password', formData);
 export const resetPassword = (formData, token) => API.post(`/auth/reset-password?token=${token}`, formData);
 export const signOut = (formData) => API.post('/auth/logout', formData);
+export const getList = (formData) => API.post('/search/getList', formData);
+export const getAllMedicine = () => API.get('/search/getAllMedicine');
+export const searchItem = (formData) => API.post('/search/searchItem', formData);
 
 export const getUserById = (id) => API.get(`/users/${id}`);
 
