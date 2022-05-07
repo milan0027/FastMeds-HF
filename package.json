@@ -1,0 +1,33 @@
+{
+  "name": "haackfest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client-install": "cd client/fastmeds && yarn install",
+    "server-install": "cd server/fastmeds && yarn install",
+    "install-all": "yarn install & yarn client-install & yarn server-install",
+    "client-dev": "cd client/fastmeds && yarn start",
+    "server-dev": "cd server/fastmeds && yarn run dev",
+    "client-lint": "cd client/fastmeds && yarn run lint:fix",
+    "server-lint": "cd server/fastmeds && yarn run lint:fix",
+    "prepare": "husky install",
+    "server": "cd server/fastmeds && yarn start",
+    "start": "yarn run install-all && yarn run server",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn --cwd client && yarn --cwd client run build"
+  },
+  "keywords": [],
+  "author": "Harshit <harshitagarwal846@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
+    "material-ui-phone-number": "^3.0.0"
+  },
+  "lint-staged": {
+    "client/fastmeds/src/**/*.js": "yarn run client-lint",
+    "server/fastmeds/**/*.js": "yarn run server-lint"
+  }
+}
