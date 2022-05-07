@@ -7,6 +7,12 @@ const { User, Medicine } = require('../models');
 const { userService } = require('../services');
 const getAddress = require('../utils/getAddress');
 
+const durationSort = (a, b) => {
+  if (a.duration > b.duration) return 1;
+  if (a.duration === b.duration) return 0;
+  if (a.duration < b.duration) return -1;
+};
+
 const searchItem = catchAsync(async (req, res) => {
   // location of user searching medicine
   const lat = req.body.latitude;
@@ -60,8 +66,18 @@ const searchItem = catchAsync(async (req, res) => {
   url = url.concat('?rtype=1&region=ind');
 
   // calculate distance using api
-  const response = await axios.get(url);
-  res.send(response.data);
+  const { data } = await axios.get(url);
+
+  const destinations = users.map((item, index) => {
+    return {
+      ...item,
+      duration: data.durations[index + 1],
+      distacne: data.distances[index + 1],
+    };
+  });
+
+  destinations.sort(durationSort);
+  res.send(destinations);
   // return top 10 nearest stores
 });
 
