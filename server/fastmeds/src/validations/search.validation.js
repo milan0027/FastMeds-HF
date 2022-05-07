@@ -7,7 +7,6 @@ const searchItem = {
     type: Joi.string().required(),
     item: Joi.string().required(),
     quantity: Joi.number().required(),
-    city: Joi.string().required(),
   }),
 };
 

@@ -17,7 +17,7 @@ const searchItem = catchAsync(async (req, res) => {
   // location of user searching medicine
   const lat = req.body.latitude;
   const long = req.body.longitude;
-  const { city } = getAddress(lat, long);
+  const { city } = await getAddress(lat, long);
 
   // search stores with brand name
   const medUsers = await User.find({
@@ -33,7 +33,7 @@ const searchItem = catchAsync(async (req, res) => {
         },
       },
     ],
-  });
+  }).select('-inventory');
 
   // search stores with generic name
   const genericUsers = await User.find({
@@ -50,7 +50,7 @@ const searchItem = catchAsync(async (req, res) => {
         },
       },
     ],
-  });
+  }).select('-inventory');
   // merge both arrays
   const users = medUsers.concat(genericUsers);
 
@@ -69,10 +69,21 @@ const searchItem = catchAsync(async (req, res) => {
   const { data } = await axios.get(url);
 
   const destinations = users.map((item, index) => {
+    // const itemObject=pick(item,['_id','name','latitude','longitude','city','address','contact','email','userType']);
+    // console.log(itemObject);
+    // console.log(data.results.durations[index+1],data.results.distances[index+1]);
     return {
-      ...item,
-      duration: data.durations[index + 1],
-      distacne: data.distances[index + 1],
+      _id: item._id,
+      name: item.name,
+      latitude: item.latitude,
+      longitude: item.longitude,
+      city: item.city,
+      address: item.address,
+      contact: item.contact,
+      email: item.email,
+      userType: item.userType,
+      duration: data.results.durations[0][index + 1],
+      distance: data.results.distances[0][index + 1],
     };
   });
 

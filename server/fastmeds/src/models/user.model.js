@@ -57,6 +57,11 @@ const userSchema = mongoose.Schema(
       trim: true,
       lowercase: true,
     },
+    address: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
     contact: {
       type: String,
       trim: true,
