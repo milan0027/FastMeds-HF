@@ -13,3 +13,5 @@ export const resetPassword = (formData, token) => API.post(`/auth/reset-password
 export const signOut = (formData) => API.post('/auth/logout', formData);
 
 export const getUserById = (id) => API.get(`/users/${id}`);
+
+export const updateInv = (formData) => API.put('/search/addItem', formData);

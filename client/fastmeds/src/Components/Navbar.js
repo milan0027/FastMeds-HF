@@ -42,7 +42,7 @@ function Navbar({ isLoggedIn, signOut }) {
             </Box>
           ) : (
             <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-              <Link color="inherit" variant="h6" underline="none" href="/auth/login" sx={rightLink}>
+              <Link color="inherit" variant="h6" underline="none" href="/inventory" sx={rightLink}>
                 {'Update Inventory'}
               </Link>
               <Link component="button" variant="h6" underline="none" onClick={signOut} sx={rightLink}>
