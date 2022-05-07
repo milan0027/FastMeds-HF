@@ -9,7 +9,6 @@ const register = {
     userType: Joi.string().required().valid('medical-store', 'hospital', 'blood-bank'),
     latitude: Joi.string().required(),
     longitude: Joi.string().required(),
-    city: Joi.string(),
     contact: Joi.string().required(),
   }),
 };
