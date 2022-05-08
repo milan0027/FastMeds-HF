@@ -8,9 +8,11 @@ const { userService } = require('../services');
 const getAddress = require('../utils/getAddress');
 
 const durationSort = (a, b) => {
-  if (a.duration > b.duration) return 1;
-  if (a.duration === b.duration) return 0;
-  if (a.duration < b.duration) return -1;
+  const x = parseFloat(a.duration);
+  const y = parseFloat(b.duration);
+  if (x > y) return 1;
+  if (x === y) return 0;
+  if (x < y) return -1;
 };
 
 const searchItem = catchAsync(async (req, res) => {
