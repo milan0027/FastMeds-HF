@@ -11,7 +11,7 @@ import showToast from '../Utils/showToastNotification';
 import { toast } from 'react-toastify';
 import Card from '../Components/Card';
 import Paper from '@mui/material/Paper';
-
+import image from '../background3.jpg';
 const Home = () => {
   //  const navigate = useNavigate();
   // const formRef = useRef();
@@ -110,7 +110,14 @@ const Home = () => {
     }
   };
   return (
-    <div style={{ backgroundColor: '#4287f5', height: '100vw' }}>
+    <div
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        height: '100vw',
+      }}
+    >
       <Navbar isLoggedIn={isLoggedIn} signOut={signOut} />
 
       <Container
@@ -119,7 +126,6 @@ const Home = () => {
         sx={{
           mt: 6,
           mb: 4,
-          height: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'start',
