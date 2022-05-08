@@ -243,7 +243,7 @@ export default function Register() {
                       sx={{ mt: 3, mb: 2 }}
                       disabled={isLoading}
                     >
-                      Register
+                      Update
                     </Button>
                   </Grid>
                 </Grid>
