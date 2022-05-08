@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import showToast from '../Utils/showToastNotification';
 import { toast } from 'react-toastify';
 import Card from '../Components/Card';
+import Paper from '@mui/material/Paper';
 
 const Home = () => {
   //  const navigate = useNavigate();
@@ -109,7 +110,7 @@ const Home = () => {
     }
   };
   return (
-    <div>
+    <div style={{ backgroundColor: '#4287f5', height: '100vw' }}>
       <Navbar isLoggedIn={isLoggedIn} signOut={signOut} />
 
       <Container
@@ -118,75 +119,80 @@ const Home = () => {
         sx={{
           mt: 6,
           mb: 4,
+          height: '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'start',
         }}
       >
-        <Box
-          sx={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <div
-            style={{
+        <Paper elevation={3} sx={{ width: '100%' }}>
+          <Box
+            sx={{
               width: '100%',
               display: 'flex',
-              justifyContent: 'space-around',
-              flexDirection: { sm: 'column', md: 'row' },
+              justifyContent: 'center',
+              flexDirection: 'column',
               alignItems: 'center',
-              margin: '15px 0px',
             }}
           >
-            <Stack spacing={2} style={{ display: 'inline-block', width: '35%' }}>
-              <Autocomplete
-                freeSolo
-                id="free-solo-2-demo"
-                onChange={(e, value) => {
-                  setFormData({ ...formData, item: String(value) });
-                  console.log(e);
-                }}
-                disableClearable
-                options={medList.map((option) => option.name)}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Search Medicines"
-                    InputProps={{
-                      ...params.InputProps,
-                      type: 'search',
-                    }}
-                  />
-                )}
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'space-around',
+                flexDirection: { sm: 'column', md: 'row' },
+                alignItems: 'center',
+                margin: '15px 0px',
+              }}
+            >
+              <Stack spacing={2} style={{ display: 'inline-block', width: '35%' }}>
+                <Autocomplete
+                  freeSolo
+                  id="free-solo-2-demo"
+                  onChange={(e, value) => {
+                    setFormData({ ...formData, item: String(value) });
+                    console.log(e);
+                  }}
+                  disableClearable
+                  options={medList.map((option) => option.name)}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Search Medicines"
+                      InputProps={{
+                        ...params.InputProps,
+                        type: 'search',
+                      }}
+                    />
+                  )}
+                />
+              </Stack>
+              <input
+                placeholder="Quantity"
+                style={{ padding: '0px 10px', width: '35%', height: '50px', fontSize: '16px' }}
+                onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
+                type="number"
               />
-            </Stack>
-            <input
-              placeholder="Quantity"
-              style={{ padding: '0px 10px', width: '35%', height: '50px', fontSize: '16px' }}
-              onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-              type="number"
-            />
-          </div>
-          <Button style={{ width: '15%' }} onClick={(e) => submitForm(e)} variant="contained">
-            Submit
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            alignItems: 'start',
-          }}
-          style={{ margin: '0px 30px', padding: '20px' }}
-        >
-          <Card />
-        </Box>
+            </div>
+            <Button style={{ width: '15%' }} onClick={(e) => submitForm(e)} variant="contained">
+              Submit
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              alignItems: 'start',
+            }}
+            style={{ margin: '0px 30px', padding: '20px' }}
+          >
+            {storeList.map((store) => {
+              return <Card key={store._id} store={store} />;
+            })}
+          </Box>
+        </Paper>
       </Container>
     </div>
   );
