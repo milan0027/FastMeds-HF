@@ -15,10 +15,10 @@ const Card = ({ store, ...props }) => {
             </p>
             <div className="d-flex flex-column flex-md-row justify-content-between">
               <p className="card-text">
-                <small className="text-muted">Estimated Distance: {store.distance}m</small>
+                <small className="text-muted">Estimated Distance: {store.distance} m</small>
               </p>
               <p className="card-text">
-                <small className="text-muted">Estimated Duration: {store.duration}sec</small>
+                <small className="text-muted">Estimated Duration: {store.duration} sec</small>
               </p>
             </div>
           </div>

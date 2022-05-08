@@ -83,8 +83,8 @@ const searchItem = catchAsync(async (req, res) => {
       contact: item.contact,
       email: item.email,
       userType: item.userType,
-      duration,
-      distance,
+      duration: duration.toFixed(2),
+      distance: distance.toFixed(2),
     };
   });
 
