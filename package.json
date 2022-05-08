@@ -22,6 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
+    "haversine-distance": "^1.2.1",
     "husky": "^7.0.4",
     "lint-staged": "^12.4.1",
     "material-ui-phone-number": "^3.0.0"

@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const axios = require('axios');
+const haversine = require('haversine-distance');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
@@ -52,24 +52,27 @@ const searchItem = catchAsync(async (req, res) => {
   // merge both arrays
   const users = medUsers.concat(genericUsers);
 
-  if (users.length === 0) return res.send({});
-
+  // if (users.length === 0) return res.send({});
+  const point1 = { lat, lng: long };
   // now users contains list of all stores having the item
-  let url = `https://apis.mapmyindia.com/advancedmaps/v1/b6d9e46ed31ce0f81991b40dd46611d5/distance_matrix/driving/${lat},${long}`;
-  // url += lat + ',' + long;
-  users.forEach((item, index) => {
-    url = url.concat(`;${item.latitude},${item.longitude}`);
-    // url += ';' + item.latitude + ',' + item.longitude;
-  });
-  url = url.concat('?rtype=1&region=ind');
+  // let url = `https://apis.mapmyindia.com/advancedmaps/v1/b6d9e46ed31ce0f81991b40dd46611d5/distance_matrix/driving/${lat},${long}`;
+  // // url += lat + ',' + long;
+  // users.forEach((item, index) => {
+  //   url = url.concat(`;${item.latitude},${item.longitude}`);
+  //   // url += ';' + item.latitude + ',' + item.longitude;
+  // });
+  // url = url.concat('?rtype=1&region=ind');
 
-  // calculate distance using api
-  const { data } = await axios.get(url);
+  // // calculate distance using api
+  // const { data } = await axios.get(url);
 
   const destinations = users.map((item, index) => {
     // const itemObject=pick(item,['_id','name','latitude','longitude','city','address','contact','email','userType']);
     // console.log(itemObject);
     // console.log(data.results.durations[index+1],data.results.distances[index+1]);
+    const point2 = { lat: item.latitude, lng: item.longitude };
+    const distance = haversine(point1, point2);
+    const duration = (distance * 6) / 100.0;
     return {
       _id: item._id,
       name: item.name,
@@ -80,8 +83,8 @@ const searchItem = catchAsync(async (req, res) => {
       contact: item.contact,
       email: item.email,
       userType: item.userType,
-      duration: data.results.durations[0][index + 1],
-      distance: data.results.distances[0][index + 1],
+      duration,
+      distance,
     };
   });
 
