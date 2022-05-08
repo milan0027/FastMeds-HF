@@ -2,7 +2,7 @@
 
 Ensure that you have Node version >= 16.13.2
 
-### `yarn install`
+### `yarn install-all`
 
 Installs all the dependencies in node_modules folder
 
@@ -10,14 +10,16 @@ Installs all the dependencies in node_modules folder
 
 Installs all the dependencies in node_modules folder in `client` directory
 
-### `yarn run server-install`
+### `yarn server-install`
 
 Installs all the dependencies in node_modules folder in `server` directory
 
-### `yarn run server-dev`
+### `yarn server-dev`
 
 Run server in development mode.
 
 ### `yarn client-dev`
 
 Runs client in development mode.
+
+### Both client and server must run together in order for the website to work properly.
