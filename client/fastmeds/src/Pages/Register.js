@@ -183,7 +183,6 @@ export default function Register() {
                 latitude: lat,
                 longitude: long,
               };
-              console.log(formdata);
               try {
                 setIsLoading(true);
 

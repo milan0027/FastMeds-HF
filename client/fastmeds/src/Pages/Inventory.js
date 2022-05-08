@@ -68,7 +68,6 @@ export default function Register() {
     if (!id) navigate('/auth/login');
     else {
       getUser(id);
-      console.log(userFields);
     }
   }, []);
   return (
@@ -124,7 +123,6 @@ export default function Register() {
               return errors;
             }}
             onSubmit={async (values) => {
-              console.log(userFields);
               const formdata = {
                 medicines: [
                   ...inputFields,
@@ -132,7 +130,6 @@ export default function Register() {
                 ],
                 userId: userFields.id,
               };
-              console.log(formdata);
               try {
                 setIsLoading(true);
 
