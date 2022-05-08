@@ -97,7 +97,6 @@ const Home = () => {
         { position: 'top-center' }
       );
       setStoreList(data);
-      console.log(storeList);
     } catch (e) {
       console.log(e);
       if (!e?.response?.data?.message) {
@@ -105,8 +104,6 @@ const Home = () => {
       }
     } finally {
       setIsLoading(false);
-      console.log(storeList);
-      console.log(isLoading);
     }
   };
   return (
@@ -157,7 +154,6 @@ const Home = () => {
                   id="free-solo-2-demo"
                   onChange={(e, value) => {
                     setFormData({ ...formData, item: String(value) });
-                    console.log(e);
                   }}
                   disableClearable
                   options={medList.map((option) => option.name)}
@@ -180,7 +176,7 @@ const Home = () => {
                 type="number"
               />
             </div>
-            <Button style={{ width: '15%' }} onClick={(e) => submitForm(e)} variant="contained">
+            <Button style={{ width: '15%' }} onClick={(e) => submitForm(e)} variant="contained" disabled={isLoading}>
               Submit
             </Button>
           </Box>
